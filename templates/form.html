@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Disease Predictor Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110vh;
+    color: #fff;
+  }
+  .{
+    text-align:center;
+    color:black;
+    margin-right=40px;
+    background-color:white:
+  }
+  h2 {
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding:5px;
+    font-size: 24px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom:8px;
+    margin-top:0px;
+
+  }
+
+  form {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 90%;
+    max-width: 700px; /* Adjusted max-width for a larger form */
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .form-group {
+    flex: 1 1 45%; /* Each group should take approximately half of the screen width */
+    margin-bottom: 10px;
+    margin-left:10px;
+    margin-right:10px;
+  }
+
+
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 12px;
+  }
+
+  .form-group input[type="text"], .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+  #final-result {
+    font-size: 14px;
+    margin-top: 15px;
+    margin-left: 50px;
+    color: #333;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+
+  @media (max-width: 480px) {
+    form {
+      width: 95%;
+      padding: 10px;
+    }
+
+    input[type="text"], select, input[type="submit"] {
+      font-size: 12px;
+      padding: 6px;
+    }
+
+    #final-result {
+      font-size: 12px;
+      padding: 8px;
+    }
+  }
+</style>
+</head>
+<body>
+  
+  
+  <form action="{{ url_for('predict_datapoint') }}" method="POST">
+    <h2>Heart Disease Predictor</h2>
+    <div class="form-group">  <!-- Left Column -->
+        <label for="Age">Age:</label>
+        <input type="text" id="Age" name="Age" placeholder="Enter age value" required>
+    </div>
+
+    <div class="form-group">  <!-- Right Column -->
+        <label for="Cholesterol">Cholesterol:</label>
+        <input type="text" id="Cholesterol" name="Cholesterol" placeholder="Enter cholesterol value" required>
+    </div>
+
+    <div class="form-group">  <!-- Left Column -->
+        <label for="Gender">Gender:</label>
+        <select id="Gender" name="Gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+
+    <div class="form-group">  <!-- Right Column -->
+        <label for="BloodPressure">Blood Pressure:</label>
+        <input type="text" id="BloodPressure" name="BloodPressure" placeholder="Enter blood pressure value" required>
+    </div>
+
+    <div class="form-group">  <!-- Left Column -->
+        <label for="HeartRate">Heart Rate:</label>
+        <input type="text" id="HeartRate" name="HeartRate" placeholder="Enter heart rate value" required>
+    </div>
+
+    <div class="form-group">  <!-- Right Column -->
+        <label for="Smoking">Smoking:</label>
+        <select id="Smoking" name="Smoking" required>
+            <option value="Current">Current</option>
+            <option value="Former">Former</option>
+            <option value="Never">Never</option>
+        </select>
+    </div>
+
+    <div class="form-group">  <!-- Left Column -->
+        <label for="AlcoholIntake">Alcohol Intake:</label>
+        <select id="AlcoholIntake" name="AlcoholIntake" required>
+            <option value="Heavy">Heavy</option>
+            <option value="Moderate">Moderate</option>
+        </select>
+    </div>
+
+    <div class="form-group">  <!-- Right Column -->
+        <label for="ExerciseHours">Exercise Hours:</label>
+        <input type="text" id="ExerciseHours" name="ExerciseHours" placeholder="Enter exercise hours" required>
+    </div>
+
+    <div class="form-group">  <!-- Left Column -->
+        <label for="FamilyHistory">Family History:</label>
+        <select id="FamilyHistory" name="FamilyHistory" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+    <div class="form-group">  <!-- Right Column -->
+        <label for="Diabetes">Diabetes:</label>
+        <select id="Diabetes" name="Diabetes" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+    <div class="form-group">  <!-- Left Column -->
+        <label for="Obesity">Obesity:</label>
+        <select id="Obesity" name="Obesity" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+    <div class="form-group">  <!-- Right Column -->
+        <label for="StressLevel">Stress Level:</label>
+        <input type="text" id="StressLevel" name="StressLevel" placeholder="Enter stress level" required>
+    </div>
+
+    <div class="form-group">  <!-- Left Column -->
+        <label for="BloodSugar">Blood Sugar:</label>
+        <input type="text" id="BloodSugar" name="BloodSugar" placeholder="Enter blood sugar level" required>
+    </div>
+
+    <div class="form-group">  <!-- Right Column -->
+        <label for="ExerciseInducedAngina">Exercise Induced Angina:</label>
+        <select id="ExerciseInducedAngina" name="ExerciseInducedAngina" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+    <div class="form-group">  <!-- Left Column -->
+        <label for="ChestPainType">Chest Pain Type:</label>
+        <select id="ChestPainType" name="ChestPainType" required>
+            <option value="Typical Angina">Typical Angina</option>
+            <option value="Atypical Angina">Atypical Angina</option>
+            <option value="Non-anginal Pain">Non-anginal Pain</option>
+            <option value="Asymptomatic">Asymptomatic</option>
+        </select>
+    </div>
+
+    <input type="submit" value="Submit">
+</form>
+    
+<div id="final-result">
+    {{ final_result }}
+</div>
+</body>
+</html>
