@@ -3,7 +3,6 @@ pandas
 scikit-learn
 seaborn
 flask
-pandas_profiling
 xgboost
 pandas-profiling==3.0.0
 visions[type_image_path]==0.7.1
